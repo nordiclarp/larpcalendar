@@ -19,7 +19,8 @@
       "executor": "@nrwl/next:server",
       "options": {
         "buildTarget": "larpcalendar-client:build",
-        "dev": true
+        "dev": true,
+        "proxyConfig": "apps/larpcalendar-client/proxy.conf.json"
       },
       "configurations": {
         "production": {

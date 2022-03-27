@@ -1,0 +1,52 @@
+{
+  "root": "apps/larpcalendar-api",
+  "sourceRoot": "apps/larpcalendar-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/larpcalendar-api",
+        "main": "apps/larpcalendar-api/src/main.ts",
+        "tsConfig": "apps/larpcalendar-api/tsconfig.app.json",
+        "assets": ["apps/larpcalendar-api/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/larpcalendar-api/src/environments/environment.ts",
+              "with": "apps/larpcalendar-api/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "larpcalendar-api:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/larpcalendar-api/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/larpcalendar-api"],
+      "options": {
+        "jestConfig": "apps/larpcalendar-api/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

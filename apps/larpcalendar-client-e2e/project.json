@@ -1,0 +1,28 @@
+{
+  "root": "apps/larpcalendar-client-e2e",
+  "sourceRoot": "apps/larpcalendar-client-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/larpcalendar-client-e2e/cypress.json",
+        "devServerTarget": "larpcalendar-client:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "larpcalendar-client:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/larpcalendar-client-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["larpcalendar-client"]
+}

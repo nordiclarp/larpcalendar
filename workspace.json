@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "larpcalendar-client": "apps/larpcalendar-client",
+    "larpcalendar-client-e2e": "apps/larpcalendar-client-e2e"
+  }
+}

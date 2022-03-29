@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
+import { hash } from 'argon2';
 
 async function main() {
   const alice = await prisma.user.upsert({
@@ -8,7 +9,7 @@ async function main() {
     create: {
       email: 'alice@prisma.io',
       name: 'Alice',
-      hash: '',
+      hash: await hash('password'),
       events: {
         create: {
           title: 'Check out Prisma with Next.js',
@@ -24,7 +25,7 @@ async function main() {
     create: {
       email: 'bob@prisma.io',
       name: 'Bob',
-      hash: '',
+      hash: await hash('password'),
       events: {
         create: [
           {

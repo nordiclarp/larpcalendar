@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@larpcalendar/dto": ["libs/dto/src/index.ts"],
       "@larpcalendar/models": ["libs/models/src/index.ts"]
     }
   },

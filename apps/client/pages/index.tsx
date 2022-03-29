@@ -1,16 +1,12 @@
+import { Event } from '@prisma/client';
 import { GetServerSideProps, NextPage } from 'next';
 
-interface EventDto {
-  id: number;
-  title: string;
-}
-
 export interface IndexProps {
-  events: Array<EventDto>;
+  events: Array<Event>;
 }
 
 export const Index: NextPage<IndexProps> = ({ events }) => {
-  const eventMapper = ({ id, title }: EventDto) => (
+  const eventMapper = ({ id, title }: Event) => (
     <div key={`Event-${id}`}>
       <p>{title}</p>
     </div>
@@ -26,7 +22,7 @@ export const Index: NextPage<IndexProps> = ({ events }) => {
 export const getServerSideProps: GetServerSideProps<IndexProps> = async (
   _context
 ) => {
-  const response = await fetch(`${process.env.API_BASE_URL}/events`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events`);
   const events = (await response.json()) || [];
   return { props: { events } };
 };

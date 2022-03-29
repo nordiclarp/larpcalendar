@@ -3,23 +3,13 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "prisma:generate": "dotenv -e ./apps/larpcalendar-api/.env prisma generate",
-    "prisma:studio": "dotenv -e ./apps/larpcalendar-api/.env prisma studio",
-    "prisma:db:seed": "dotenv -e ./apps/larpcalendar-api/.env prisma db seed",
-    "prisma:migrate:dev": "dotenv -e ./apps/larpcalendar-api/.env prisma migrate dev",
-    "prisma:migrate:reset": "dotenv -e ./apps/larpcalendar-api/.env prisma migrate reset",
-    "db:dev:up": "docker compose up dev-db -d",
-    "db:dev:rm": "docker compose rm dev-db -s -f -v",
-    "db:dev:restart": "npm run db:dev:rm && npm run db:dev:up",
-    "db:dev": "npm run db:dev:restart && sleep 1 && npm run prisma:migrate:dev && npm run prisma:db:seed",
-    "db:test:up": "docker compose up test-db -d",
-    "db:test:rm": "docker compose rm test-db -s -f -v",
-    "db:test:restart": "npm run db:test:rm && npm run db:test:up",
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
     "test:ci": "nx test",
-    "start:web": "npm run db:dev && npx nx run-many --target=serve --projects=larpcalendar-api,larpcalendar-client"
+    "db:dev": "nx run-many --target=prep --projects=db,models --parallel=false",
+    "db:test": "nx run-many --target=prep --projects=db,models --parallel=false --configuration=test",
+    "start:web": "npm run db:dev && nx run-many --target=serve --projects=api,client"
   },
   "private": true,
   "dependencies": {
@@ -80,7 +70,7 @@
     "typescript": "~4.5.2"
   },
   "prisma": {
-    "schema": "apps/larpcalendar-api/prisma/schema.prisma",
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} apps/larpcalendar-api/prisma/seed.ts"
+    "schema": "libs/models/src/prisma/schema.prisma",
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} ./src/prisma/seed.ts"
   }
 }

@@ -1,0 +1,54 @@
+{
+  "root": "apps/db",
+  "sourceRoot": "apps/db",
+  "projectType": "application",
+  "targets": {
+    "rm": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "docker compose rm dev-db -s -f -v",
+        "cwd": "apps/db"
+      },
+      "configurations": {
+        "test": {
+          "command": "docker compose rm test-db -s -f -v",
+          "cwd": "apps/db"
+        }
+      }
+    },
+
+    "up": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": ["docker compose up dev-db -d", "sleep 1"],
+        "cwd": "apps/db",
+        "parallel": false
+      },
+      "configurations": {
+        "test": {
+          "commands": ["docker compose up test-db -d", "sleep 1"],
+          "cwd": "apps/db",
+          "parallel": false
+        }
+      }
+    },
+
+    "prep": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": ["npx nx run db:rm", "npx nx run db:up"],
+        "cwd": "apps/db",
+        "parallel": false
+      },
+      "configurations": {
+        "test": {
+          "commands": [
+            "npx nx run db:rm --configuration=test",
+            "npx nx run db:up --configuration=test"
+          ]
+        }
+      }
+    }
+  },
+  "tags": []
+}

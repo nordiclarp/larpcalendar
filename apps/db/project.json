@@ -6,12 +6,12 @@
     "rm": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "docker compose rm dev-db -s -f -v",
+        "command": "docker compose rm larpcalendar_dev_db -s -f -v",
         "cwd": "apps/db"
       },
       "configurations": {
         "test": {
-          "command": "docker compose rm test-db -s -f -v",
+          "command": "docker compose rm larpcalendar_test_db -s -f -v",
           "cwd": "apps/db"
         }
       }
@@ -20,13 +20,13 @@
     "up": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "commands": ["docker compose up dev-db -d", "sleep 1"],
+        "commands": ["docker compose up larpcalendar_dev_db -d", "sleep 1"],
         "cwd": "apps/db",
         "parallel": false
       },
       "configurations": {
         "test": {
-          "commands": ["docker compose up test-db -d", "sleep 1"],
+          "commands": ["docker compose up larpcalendar_test_db -d", "sleep 1"],
           "cwd": "apps/db",
           "parallel": false
         }

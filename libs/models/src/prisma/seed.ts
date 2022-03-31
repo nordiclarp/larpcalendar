@@ -1,46 +1,66 @@
-import { PrismaClient } from '@prisma/client';
+import { OrganizerRole, PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 import { hash } from 'argon2';
+import faker from '@faker-js/faker';
+
+const eventName = () => `${faker.word.adjective()} ${faker.word.noun()}`;
 
 async function main() {
-  const alice = await prisma.user.upsert({
-    where: { email: 'alice@prisma.io' },
-    update: {},
-    create: {
-      email: 'alice@prisma.io',
-      name: 'Alice',
+  await prisma.user.create({
+    data: {
+      email: 'admin@example.com',
+      name: 'Admin',
+      role: 'ADMIN',
       hash: await hash('password'),
-      events: {
-        create: {
-          title: 'Check out Prisma with Next.js',
-          published: true,
-        },
-      },
     },
+  });
+  await prisma.user.createMany({
+    data: [
+      ...(await Promise.all(
+        Array(10)
+          .fill(null)
+          .map(async () => ({
+            email: faker.internet.email(),
+            name: faker.name.findName(),
+            hash: await hash('password'),
+          }))
+      )),
+    ],
   });
 
-  const bob = await prisma.user.upsert({
-    where: { email: 'bob@prisma.io' },
-    update: {},
-    create: {
-      email: 'bob@prisma.io',
-      name: 'Bob',
-      hash: await hash('password'),
-      events: {
-        create: [
-          {
-            title: 'Follow Prisma on Twitter',
-            published: true,
+  for (let i = 0; i < 5; i += 1) {
+    await prisma.organizer.create({
+      data: {
+        name: faker.company.companyName(),
+        events: {
+          createMany: {
+            data: Array(10)
+              .fill(null)
+              .map(() => ({
+                title: eventName(),
+                startDate: faker.date.future(),
+              })),
           },
-          {
-            title: 'Follow Nexus on Twitter',
-            published: true,
-          },
-        ],
+        },
       },
-    },
-  });
-  console.log({ alice, bob });
+    });
+  }
+  const users = await prisma.user.findMany({ where: { role: 'USER' } });
+  const organizers = await prisma.organizer.findMany();
+  await Promise.all(
+    users.map(({ id }, index) => {
+      const organizerId = organizers[Math.floor(index / 2)].id;
+      const role: OrganizerRole = (index / 2) % 1 ? 'ADMIN' : 'USER';
+      return prisma.user.update({
+        where: { id },
+        data: {
+          UsersInOrganizers: {
+            create: { role, organizer: { connect: { id: organizerId } } },
+          },
+        },
+      });
+    })
+  );
 }
 
 main()

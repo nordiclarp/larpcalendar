@@ -96,6 +96,15 @@
         "command": "npx prisma generate",
         "cwd": "libs/models"
       }
+    },
+
+    "serve": {
+      "builder": "@nrwl/workspace:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npx prisma studio",
+        "cwd": "libs/models"
+      }
     }
   },
   "tags": []

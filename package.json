@@ -9,7 +9,7 @@
     "test:ci": "nx test",
     "db:dev": "nx run-many --target=prep --projects=db,models --parallel=false",
     "db:test": "nx run-many --target=prep --projects=db,models --parallel=false --configuration=test",
-    "start:web": "npm run db:dev && nx run-many --target=serve --projects=api,client"
+    "start:web": "npm run db:dev && nx run-many --target=serve --projects=api,models,client"
   },
   "private": true,
   "dependencies": {
@@ -38,6 +38,7 @@
     "tslib": "^2.0.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^6.1.1",
     "@nestjs/schematics": "^8.0.0",
     "@nestjs/testing": "^8.0.0",
     "@nrwl/cli": "13.9.5",

@@ -1,18 +1,21 @@
 import { AppProps } from 'next/app';
+import { ChakraProvider } from '@chakra-ui/react';
 import Head from 'next/head';
-import './styles.css';
 
-function CustomApp({ Component, pageProps }: AppProps) {
-  return (
-    <>
-      <Head>
-        <title>Welcome to client!</title>
-      </Head>
-      <main className="app">
-        <Component {...pageProps} />
-      </main>
-    </>
-  );
-}
+import { Layout } from '../components';
+import { theme } from '../theme/theme';
+
+import './_app.scss';
+
+export const CustomApp = ({ Component, pageProps }: AppProps) => (
+  <ChakraProvider theme={theme}>
+    <Head>
+      <title>Larp Calendar</title>
+    </Head>
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  </ChakraProvider>
+);
 
 export default CustomApp;

@@ -6,8 +6,14 @@ import { Event } from '@prisma/client';
 export class EventsService {
   constructor(private prisma: PrismaService) {}
 
-  async getData(): Promise<Event[]> {
-    const events = (await this.prisma.event.findMany()) || [];
+  async getAll(): Promise<Event[]> {
+    const events =
+      (await this.prisma.event.findMany({ orderBy: { startDate: 'asc' } })) ||
+      [];
     return events;
+  }
+
+  async getOne(id: string): Promise<Event> {
+    return await this.prisma.event.findUnique({ where: { id } });
   }
 }

@@ -1,27 +1,20 @@
-import { Event } from '@prisma/client';
-import { GetServerSideProps, NextPage } from 'next';
+import { Event as LarpEvent } from '@prisma/client';
+import { GetStaticProps, NextPage } from 'next';
+import { EventCardList } from '../components/event-card-list/event-card-list';
+
+import { Page } from '../components/page/page';
 
 export interface IndexProps {
-  events: Array<Event>;
+  events: Array<LarpEvent>;
 }
 
-export const Index: NextPage<IndexProps> = ({ events }) => {
-  const eventMapper = ({ id, title }: Event) => (
-    <div key={`Event-${id}`}>
-      <p>{title}</p>
-    </div>
-  );
-  return (
-    <div>
-      <h1>Larp Calendar</h1>
-      <div>{events.map(eventMapper)}</div>
-    </div>
-  );
-};
+export const Index: NextPage<IndexProps> = ({ events }) => (
+  <Page title="Events" crumbs={[{ label: 'Events', href: '/' }]}>
+    <EventCardList events={events} />
+  </Page>
+);
 
-export const getServerSideProps: GetServerSideProps<IndexProps> = async (
-  _context
-) => {
+export const getStaticProps: GetStaticProps<IndexProps> = async (_context) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events`);
   const events = (await response.json()) || [];
   return { props: { events } };

@@ -5,6 +5,7 @@
     "client": "apps/client",
     "client-e2e": "apps/client-e2e",
     "db": "apps/db",
-    "prisma": "libs/prisma"
+    "prisma": "libs/prisma",
+    "utils": "libs/utils"
   }
 }

@@ -1,0 +1,33 @@
+{
+  "folders": [
+    {
+      "name": "Larp Calendar",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "node_modules": true
+    },
+    "npm.packageManager": "npm",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true
+    },
+    "editor.formatOnSave": true
+  },
+  "extensions": {
+    "recommendations": [
+      "nrwl.angular-console",
+      "esbenp.prettier-vscode",
+      "firsttris.vscode-jest-runner",
+      "dbaeumer.vscode-eslint",
+      "eamodio.gitlens",
+      "ms-azuretools.vscode-docker",
+      "googlecloudtools.cloudcode",
+      "mikestead.dotenv",
+      "EditorConfig.EditorConfig",
+      "satansdeer.plop",
+      "Prisma.prisma"
+    ]
+  }
+}

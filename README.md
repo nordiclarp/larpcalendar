@@ -1,94 +1,97 @@
+# Larp Calendar
 
+![Larp Calendar logo](assets/logo/larpcalendar-logo-light.png?raw=true 'Larp Calendar')
 
-# Larpcalendar
+_Larp Calendar logo designed by [Niklas Rhöse](https://neostate.net/)._
 
-This project was generated using [Nx](https://nx.dev).
+[Larp Calendar](https://larpcalendar.org/) is a website for keeping track of larp events accepting international participants.
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+This repository contains the source code for the website as well as some documentation on how to contribute.
 
-🔎 **Smart, Fast and Extensible Build System**
+## Tech Stack
 
-## Adding capabilities to your workspace
+The core technical ideals of this project is to maintain a modern codebase with a professional grade structure and avoid user hostile patterns and technologies like tracking, dark patterns and such.
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+### Repository
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+This is a monorepo built on [Nx](https://nx.dev). In short it's a tool that helps us keep a clean structure and helps us write better code.
 
-Below are our core plugins:
+### Backend
 
-- [React](https://reactjs.org)
-  - `npm install --save-dev @nrwl/react`
-- Web (no framework frontends)
-  - `npm install --save-dev @nrwl/web`
-- [Angular](https://angular.io)
-  - `npm install --save-dev @nrwl/angular`
-- [Nest](https://nestjs.com)
-  - `npm install --save-dev @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `npm install --save-dev @nrwl/express`
-- [Node](https://nodejs.org)
-  - `npm install --save-dev @nrwl/node`
+The site backend is a [NodeJS](https://nodejs.org/) api build on [NestJS](https://nestjs.com/) using [Prisma](https://www.prisma.io/) for database management and [Passport](https://www.passportjs.org/) for authentication. For local development [Docker](https://www.docker.com/) is used to run a local [Postgres](https://www.postgresql.org/) database.
 
-There are also many [community plugins](https://nx.dev/community) you could add.
+### Frontend
 
-## Generate an application
+The site frontend is built on [Next.js](https://nextjs.org/) with the [Chakra UI](https://chakra-ui.com/) library for styling and interface. We strive for keeping the code modular, easy to maintain and as testable as possible.
 
-Run `nx g @nrwl/react:app my-app` to generate an application.
+## Recommended Tools
 
-> You can use any of the plugins above to generate applications as well.
+- [Visual Studio Code](https://code.visualstudio.com/) for editing code. There is a vscode workspace set up in the repository to help you follow the standards and settings of the project.
+- [GitHub Desktop](https://desktop.github.com/) for source control if you are not a fan of command line git use.
+- [commitizen](https://github.com/commitizen/cz-cli) for clean git commit messages.
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+## Local Development
 
-## Generate a library
+### Pre-requisites
 
-Run `nx g @nrwl/react:lib my-lib` to generate a library.
+To run the project locally you need:
 
-> You can also use any of the plugins above to generate libraries as well.
+- [git](https://git-scm.com/) for source control.
+- [node.js](https://nodejs.org/) version 16 to run the code.
+- [Docker](https://www.docker.com/) to run a local database.
 
-Libraries are shareable across libraries and applications. They can be imported from `@larpcalendar/mylib`.
+### Getting Started
 
-## Development server
+Check out the code from Github using your favorite method.
 
-Run `nx serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+Enter the project directory and run `npm install` to install packages.
 
-## Code scaffolding
+Copy the file `.env.example` to `.env`.
 
-Run `nx g @nrwl/react:component my-component --project=my-app` to generate a new component.
-
-## Build
-
-Run `nx build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `nx test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `nx e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev) to learn more.
+Open the file `larpcalendar.code-workspace` in Visual Studio Code and install the suggested plugins.
 
 
 
-## ☁ Nx Cloud
+Run the npm script `start:dev`, either from within Visual Studio Code or from the command line with `npm run start:dev`. This will start the Docker container with the database, migrate the database schema, seed it with data, start Prisma Studio, start the api server and start frontend web server.
 
-### Distributed Computation Caching & Distributed Task Execution
+You can now access Prisma Studio on <http://localhost:5555>, the api server on <http://localhost:3333> and the website itself on <http://localhost:4200/>.
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
+The frontend app uses hot module reloading, so any changes in the code should automatically reload the page.
 
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
+### Mock Data
 
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
+There is a handful of default events pre-populated in the mock database.
 
-Visit [Nx Cloud](https://nx.app/) to learn more.
+There are several users for testing auth. There is one admin user with the email address `admin@example.com`. All other users are regular users. All users including admin have the password `password`.
+
+There are several organizer profiles. Each have at least one admin user and one regular contributor attached to them. They also each have some events.
+
+You can make any changes you like to the mock data in the ui. All data is reset when data is seeded again.
+
+The easiest way to run migrations and reseed data is to just restart the `start:dev` npm script.
+
+### Running Tests
+
+Run `npm test:dev` to run the test. Tests run on a separate fresh database
+
+### Adding a Feature
+
+To add features to the project you must use Nx generators. These will scaffold components for you with tests and proper defaults. The easiest way to do this is with the Nx plugin in Visual Studio Code. If you want to use the command line you can read more on how to in the [Nx Generators documentation](https://nx.dev/l/r/generators/using-schematics).
+
+The api and client reside in the `apps` folder.
+
+Libs supporting these are in the `libs` folder.
+
+### Committing Code
+
+This repository uses Husky to lint and test the code before allowing a commit.
+
+Please use commitizen to write a concise and clear commit message following the [conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) standard.
+
+When a pull request is created on Github a continous integration/continuous deploy workflow will run that lints, tests, builds and deploys the app to a temporary test site. (WIP)
+
+### Contact
+
+You can use the [issues tab](https://github.com/nordiclarp/larpcalendar/issues) in this repository to report bugs or suggest improvements.
+
+If you have any questions, don't hesitate to reach out! You can reach me on [johannes@axner.io](mailto:johannes@axner.io) or join our community in the [Nordic Larp Discord](https://discord.gg/bGvAFDsDwV).

@@ -1,19 +1,19 @@
 {
-  "root": "libs/models",
-  "sourceRoot": "libs/models/src",
+  "root": "libs/prisma",
+  "sourceRoot": "libs/prisma/src",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/models/**/*.ts"]
+        "lintFilePatterns": ["libs/prisma/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/models"],
+      "outputs": ["coverage/libs/prisma"],
       "options": {
-        "jestConfig": "libs/models/jest.config.js",
+        "jestConfig": "libs/prisma/jest.config.js",
         "passWithNoTests": true
       }
     },
@@ -23,7 +23,7 @@
       "outputs": [],
       "options": {
         "commands": ["prisma migrate dev", "prisma db seed"],
-        "cwd": "libs/models",
+        "cwd": "libs/prisma",
         "envFile": ".env"
       },
       "configurations": {
@@ -38,7 +38,7 @@
       "outputs": [],
       "options": {
         "command": "npx prisma migrate dev",
-        "cwd": "libs/models",
+        "cwd": "libs/prisma",
         "envFile": ".env"
       },
       "configurations": {
@@ -52,7 +52,7 @@
       "outputs": [],
       "options": {
         "command": "npx prisma migrate reset",
-        "cwd": "libs/models",
+        "cwd": "libs/prisma",
         "envFile": ".env"
       },
       "configurations": {
@@ -66,7 +66,7 @@
       "outputs": [],
       "options": {
         "command": "npx prisma migrate up",
-        "cwd": "libs/models",
+        "cwd": "libs/prisma",
         "envFile": ".env"
       },
       "configurations": {
@@ -80,7 +80,7 @@
       "outputs": [],
       "options": {
         "command": "npx prisma db seed",
-        "cwd": "libs/models",
+        "cwd": "libs/prisma",
         "envFile": ".env"
       },
       "configurations": {
@@ -94,7 +94,7 @@
       "outputs": [],
       "options": {
         "command": "npx prisma generate",
-        "cwd": "libs/models"
+        "cwd": "libs/prisma"
       }
     },
 
@@ -103,7 +103,7 @@
       "outputs": [],
       "options": {
         "command": "npx prisma studio",
-        "cwd": "libs/models"
+        "cwd": "libs/prisma"
       }
     }
   },

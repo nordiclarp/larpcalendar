@@ -8,5 +8,5 @@
     "target": "es2015"
   },
   "exclude": ["**/*.spec.ts", "**/*.test.ts"],
-  "include": ["**/*.ts", "../../libs/models/src/lib/prisma.module.ts"]
+  "include": ["**/*.ts", "../../libs/prisma/src/lib/prisma.module.ts"]
 }

@@ -1,4 +1,4 @@
-import { PrismaService } from '@larpcalendar/models';
+import { PrismaService } from '@larpcalendar/prisma';
 import { Injectable } from '@nestjs/common';
 import { Event } from '@prisma/client';
 

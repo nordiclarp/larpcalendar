@@ -7,9 +7,9 @@
     "build": "nx build",
     "test": "nx test",
     "test:ci": "nx test",
-    "db:dev": "nx run-many --target=prep --projects=db,models --parallel=false",
-    "db:test": "nx run-many --target=prep --projects=db,models --parallel=false --configuration=test",
-    "start:web": "npm run db:dev && nx run-many --target=serve --projects=api,models,client"
+    "db:dev": "nx run-many --target=prep --projects=db,prisma --parallel=false",
+    "db:test": "nx run-many --target=prep --projects=db,prisma --parallel=false --configuration=test",
+    "start:dev": "npm run db:dev && nx run-many --target=serve --projects=api,prisma,client"
   },
   "private": true,
   "dependencies": {
@@ -80,7 +80,7 @@
     "typescript": "~4.5.2"
   },
   "prisma": {
-    "schema": "libs/models/src/prisma/schema.prisma",
+    "schema": "libs/prisma/src/prisma/schema.prisma",
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} ./src/prisma/seed.ts"
   }
 }

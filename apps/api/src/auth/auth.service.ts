@@ -1,4 +1,4 @@
-import { PrismaService } from '@larpcalendar/models';
+import { PrismaService } from '@larpcalendar/prisma';
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { hash, verify } from 'argon2';

@@ -1,4 +1,4 @@
-import { PrismaModule } from '@larpcalendar/models';
+import { PrismaModule } from '@larpcalendar/prisma';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { EventsModule } from './events/events.module';

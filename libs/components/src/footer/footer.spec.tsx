@@ -1,11 +1,10 @@
 import { render } from '@testing-library/react';
-import React from 'react';
 
-import Index from '../pages/index';
+import { Footer } from './footer';
 
-describe('Index', () => {
+describe('Footer', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Index />);
+    const { baseElement } = render(<Footer />);
     expect(baseElement).toBeTruthy();
   });
 });

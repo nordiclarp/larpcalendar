@@ -1,11 +1,10 @@
 import { render } from '@testing-library/react';
-import React from 'react';
 
-import Index from '../pages/index';
+import { Breadcrumbs } from './breadcrumbs';
 
-describe('Index', () => {
+describe('Breadcrumbs', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Index />);
+    const { baseElement } = render(<Breadcrumbs />);
     expect(baseElement).toBeTruthy();
   });
 });

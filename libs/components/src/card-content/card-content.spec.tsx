@@ -1,11 +1,10 @@
 import { render } from '@testing-library/react';
-import React from 'react';
 
-import Index from '../pages/index';
+import { CardContent } from './card-content';
 
-describe('Index', () => {
+describe('CardContent', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Index />);
+    const { baseElement } = render(<CardContent />);
     expect(baseElement).toBeTruthy();
   });
 });

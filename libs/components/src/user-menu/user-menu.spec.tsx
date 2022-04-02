@@ -1,11 +1,10 @@
 import { render } from '@testing-library/react';
-import React from 'react';
 
-import Index from '../pages/index';
+import { UserMenu } from './user-menu';
 
-describe('Index', () => {
+describe('UserMenu', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Index />);
+    const { baseElement } = render(<UserMenu />);
     expect(baseElement).toBeTruthy();
   });
 });

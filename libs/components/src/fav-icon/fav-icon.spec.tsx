@@ -1,11 +1,10 @@
 import { render } from '@testing-library/react';
-import React from 'react';
 
-import Index from '../pages/index';
+import { FavIcon } from './fav-icon';
 
-describe('Index', () => {
+describe('FavIcon', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Index />);
+    const { baseElement } = render(<FavIcon />);
     expect(baseElement).toBeTruthy();
   });
 });

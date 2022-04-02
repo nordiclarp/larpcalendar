@@ -1,11 +1,10 @@
 import { render } from '@testing-library/react';
-import React from 'react';
 
-import Index from '../pages/index';
+import { EventCardList } from './event-card-list';
 
-describe('Index', () => {
+describe('EventCardList', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<Index />);
+    const { baseElement } = render(<EventCardList />);
     expect(baseElement).toBeTruthy();
   });
 });

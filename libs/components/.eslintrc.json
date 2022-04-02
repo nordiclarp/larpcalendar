@@ -13,7 +13,10 @@
       "plugins": ["unused-imports"],
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "settings": {
-        "import/core-modules": ["@larpcalendar/components"]
+        "import/core-modules": [
+          "@larpcalendar/components",
+          "@larpcalendar/utils"
+        ]
       },
       "rules": {
         "@next/next/no-html-link-for-pages": ["error", "apps/client/pages"],
@@ -27,6 +30,12 @@
             },
             "warnOnUnassignedImports": true,
             "pathGroups": [
+              {
+                "pattern": "*larpcalendar/*",
+                "group": "unknown",
+                "patternOptions": { "matchBase": true },
+                "position": "after"
+              },
               {
                 "pattern": "*.scss",
                 "group": "unknown",
@@ -74,8 +83,5 @@
       "files": ["*.js", "*.jsx"],
       "rules": {}
     }
-  ],
-  "env": {
-    "jest": true
-  }
+  ]
 }

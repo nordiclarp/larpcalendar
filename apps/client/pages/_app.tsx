@@ -1,11 +1,12 @@
-import { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
+import { AppProps } from 'next/app';
 import Head from 'next/head';
 
-import { Layout } from '../components';
+import { Layout } from '@larpcalendar/components';
+
 import { theme } from '../theme/theme';
 
-import './_app.scss';
+import '../style/global.scss';
 
 export const CustomApp = ({ Component, pageProps }: AppProps) => (
   <ChakraProvider theme={theme}>

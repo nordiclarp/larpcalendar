@@ -1,9 +1,7 @@
 import { Event as LarpEvent } from '@prisma/client';
 import { GetStaticProps, NextPage } from 'next';
-import { EventCardList } from '../components/event-card-list/event-card-list';
 
-import { Page } from '../components/page/page';
-
+import { EventCardList, Page } from '@larpcalendar/components';
 export interface IndexProps {
   events: Array<LarpEvent>;
 }

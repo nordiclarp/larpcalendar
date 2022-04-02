@@ -1,7 +1,7 @@
 import { Event as LarpEvent } from '@prisma/client';
 import { GetStaticProps, NextPage } from 'next';
 
-import { Page } from '../../components/page/page';
+import { Page } from '@larpcalendar/components';
 
 export interface EventPageProps {
   event: LarpEvent;

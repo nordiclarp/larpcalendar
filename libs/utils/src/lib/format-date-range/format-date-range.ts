@@ -1,6 +1,6 @@
 export const formatDateRange = (
   startInput: Date | string,
-  endInput?: Date | string
+  endInput?: Date | string | null
 ): string => {
   const start = new Date(startInput);
   const end = endInput && new Date(endInput);

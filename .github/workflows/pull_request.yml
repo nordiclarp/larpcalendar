@@ -1,0 +1,36 @@
+name: CI
+on:
+  pull_request:
+
+jobs:
+  pr:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v2
+      - name: Install dependencies
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-
+      - run: npm ci
+      - run: npx nx affected --target=build --parallel=3
+      - run: npx nx affected --target=test --parallel=2
+      - id: check_api_files
+        uses: andstor/file-existence-action@v1
+        with:
+          files: 'dist/apps/api'
+      - id: check_client_files
+        uses: andstor/file-existence-action@v1
+        with:
+          files: 'dist/apps/client'

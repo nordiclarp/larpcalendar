@@ -1,5 +1,5 @@
 import { Event as LarpEvent } from '@prisma/client';
-import { GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 
 import { EventCardList, Page } from '@larpcalendar/components';
 export interface IndexProps {
@@ -12,7 +12,9 @@ export const Index: NextPage<IndexProps> = ({ events }) => (
   </Page>
 );
 
-export const getStaticProps: GetStaticProps<IndexProps> = async (_context) => {
+export const getServerSideProps: GetServerSideProps<IndexProps> = async (
+  _context
+) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events`);
   const events = (await response.json()) || [];
   return { props: { events } };

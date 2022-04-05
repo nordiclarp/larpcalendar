@@ -6,8 +6,9 @@ export interface IndexProps {
   events: Array<LarpEvent>;
 }
 
-export const Index: NextPage<IndexProps> = ({ events }) => (
+export const Index: NextPage<IndexProps> = ({ events = [] }) => (
   <Page title="Events" crumbs={[{ label: 'Events', href: '/' }]}>
+    <p>{process.env.NEXT_PUBLIC_API_URL}</p>
     <EventCardList events={events} />
   </Page>
 );
@@ -16,7 +17,7 @@ export const getServerSideProps: GetServerSideProps<IndexProps> = async (
   _context
 ) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events`);
-  const events = (await response.json()) || [];
+  const events = response ? await response.json() : [];
   return { props: { events } };
 };
 

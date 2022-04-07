@@ -8,7 +8,8 @@ export interface IndexProps {
 
 export const Index: NextPage<IndexProps> = ({ events = [] }) => (
   <Page title="Events" crumbs={[{ label: 'Events', href: '/' }]}>
-    <p>{process?.env?.NEXT_PUBLIC_API_URL || 'No api'}</p>
+    <p>NODE_ENV: {process?.env?.NODE_ENV || 'No env'}</p>
+    <p>NEXT_PUBLIC_API_URL: {process?.env?.NEXT_PUBLIC_API_URL || 'No api'}</p>
     <EventCardList events={events} />
   </Page>
 );

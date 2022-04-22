@@ -9,14 +9,14 @@ import {
   IconButton,
   useDisclosure,
 } from '@chakra-ui/react';
-import { useRef } from 'react';
 import { FiMenu } from 'react-icons/fi';
 
 import { HeaderButton } from '../header-button/header-button';
 
 export const Hamburger: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = useRef();
+  // TODO: Make ref work
+  // const btnRef = useRef<HTMLButtonElement>();
 
   return (
     <>
@@ -24,14 +24,14 @@ export const Hamburger: React.FC = () => {
         variant="ghost"
         icon={<FiMenu fontSize="1.25rem" />}
         aria-label="Open Menu"
-        ref={btnRef}
+        // ref={btnRef}
         onClick={onOpen}
       />
       <Drawer
         isOpen={isOpen}
         placement="right"
         onClose={onClose}
-        finalFocusRef={btnRef}
+        // finalFocusRef={btnRef}
       >
         <DrawerOverlay />
 

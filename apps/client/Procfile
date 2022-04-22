@@ -1,0 +1,1 @@
+web: cd dist/apps/client && next start

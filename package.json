@@ -10,7 +10,8 @@
     "db:dev": "nx run-many --target=prep --projects=db,prisma --parallel=false",
     "db:test": "nx run-many --target=prep --projects=db,prisma --parallel=false --configuration=test",
     "start:dev": "npm run db:dev && nx run-many --target=serve --projects=api,prisma,client",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "heroku-postbuild": "nx build $PROJECT_NAME --prod"
   },
   "private": true,
   "dependencies": {

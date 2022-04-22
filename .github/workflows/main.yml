@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-
 jobs:
   main:
     runs-on: ubuntu-latest
@@ -25,15 +24,6 @@ jobs:
           key: npm-${{ hashFiles('package-lock.json') }}
           restore-keys: npm-
       - run: npm ci
-      - run: npx nx affected --target=build --parallel=3
-      - run: npx nx affected --target=test --parallel=2
-      - id: check_api_files
-        uses: andstor/file-existence-action@v1
-        with:
-          files: 'dist/apps/api'
-      - id: check_client_files
-        uses: andstor/file-existence-action@v1
-        with:
-          files: 'dist/apps/client'
-      # if: steps.check_api_files.outputs.files_exists == 'true'
-      # if: steps.check_client_files.outputs.files_exists == 'true'
+      - run: npx nx affected --target=lint --parallel=2
+      - run: npx nx affected --target=test --parallel=2 --ci --code-coverage
+      - run: npx nx affected --target=build --parallel=2
